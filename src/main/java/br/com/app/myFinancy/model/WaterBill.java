@@ -1,4 +1,4 @@
-package br.com.app.myFinancy.domain.model;
+package br.com.app.myFinancy.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,24 +17,24 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Internet implements Serializable {
+public class WaterBill implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
-    @Value("Conta de internet")
+    @Value("Conta de água")
     private String description;
 
     @NotNull(message = "{mandatory.price.field}")
     private BigDecimal price;
 
+    private Double expenditure;
+
     @NotEmpty(message = "{mandatory.date.field}")
     @Temporal(TemporalType.DATE)
     private Date dueDate;
-
     @ManyToOne
     @JoinColumn(name = "cd_user")
     private User users;
-
 }

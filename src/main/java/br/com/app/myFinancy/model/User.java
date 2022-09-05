@@ -1,10 +1,12 @@
-package br.com.app.myFinancy.domain.model;
+package br.com.app.myFinancy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import java.io.Serializable;
@@ -30,24 +32,36 @@ public class User implements Serializable {
     @NotEmpty(message = "{mandatory.login.field}")
     private String login;
 
+    @Email
+    @NotEmpty(message = "{mandatory.email.field}")
+    private String email;
+
     @ElementCollection
     private List<BigDecimal> income;
 
     @NotEmpty(message = "{mandatory.password.field}")
     private String password;
 
+    @Column
+    private Boolean isActive;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private Set<WaterBill> listWaterBill;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private Set<EnergyBill> listEnergyBill;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private Set<Internet> listInternet;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private Set<CardBill> listCardBill;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private Set<OtherExpenses> listOtherExpenses;
 

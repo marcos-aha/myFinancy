@@ -1,9 +1,9 @@
-package br.com.app.myFinancy.domain.model;
+package br.com.app.myFinancy.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -14,17 +14,16 @@ import java.util.Date;
 import java.util.UUID;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-public class CardBill implements Serializable {
+public class Internet implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
-    @Length(max = 20)
-    @NotEmpty(message = "{mandatory.description.field}")
+    @Value("Conta de internet")
     private String description;
 
     @NotNull(message = "{mandatory.price.field}")
@@ -34,11 +33,8 @@ public class CardBill implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dueDate;
 
-    @NotEmpty(message = "{mandatory.closingDate.field}")
-    @Temporal(TemporalType.DATE)
-    private Date closingDate;
-
     @ManyToOne
     @JoinColumn(name = "cd_user")
     private User users;
+
 }

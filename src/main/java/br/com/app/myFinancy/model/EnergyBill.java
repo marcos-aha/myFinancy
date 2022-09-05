@@ -1,9 +1,9 @@
-package br.com.app.myFinancy.domain.model;
+package br.com.app.myFinancy.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -13,22 +13,23 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class OtherExpenses implements Serializable {
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class EnergyBill implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
-    @Length(max = 20)
-    @NotEmpty(message = "{mandatory.description.field}")
+    @Value("Conta de luz")
     private String description;
 
     @NotNull(message = "{mandatory.price.field}")
     private BigDecimal price;
+
+    private Double expenditure;
 
     @NotEmpty(message = "{mandatory.date.field}")
     @Temporal(TemporalType.DATE)
