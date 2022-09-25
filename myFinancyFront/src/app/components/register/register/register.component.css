@@ -1,0 +1,39 @@
+.body {
+    height:100%; 
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(37,97,207,1) 0%, rgba(0,212,255,1) 100%);
+
+}
+
+html{
+    background-color: red;
+}
+
+.container {
+    height:100%; 
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(37,97,207,1) 0%, rgba(0,212,255,1) 100%);
+    display: flex;
+    align-items: center;
+    overflow: scroll;
+}
+
+.form {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    align-items: center;
+    justify-content: center;  
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.register{
+    margin-top: 2rem;
+    padding: .5rem 4rem;
+    font-size: 1rem;
+}

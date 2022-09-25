@@ -1,0 +1,81 @@
+.container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    background-color: white;
+}
+.input {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-around;
+    background-color: white;
+    padding: 3rem;
+
+}
+
+.a{
+    border: .5rem solid rgb(6, 194, 6);
+    border-radius: 3rem;
+    height: 3.3rem;
+}
+.iconGreen {
+    color:rgb(6, 194, 6);
+}
+.b{
+    border: .5rem solid red;
+    border-radius: 3rem;
+    height: 3.3rem;
+}
+
+.container-card {
+    margin-top: 1rem;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+button {
+    padding: 1rem;
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(37,97,207,1) 0%, rgba(0,212,255,1) 100%);
+}
+mat-icon.card {
+    margin-left: .7rem;
+}
+
+.energy{
+    color: yellow;
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+.water{
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+.internet mat-icon{
+    color: blue;
+}
+.internet{
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+.card mat-icon{
+    color: orangered;
+}
+
+button.card{
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+.other mat-icon{
+    color: blueviolet;
+}
+
+button.other{
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+
