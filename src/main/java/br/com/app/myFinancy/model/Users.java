@@ -10,17 +10,14 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "Users")
-public class User implements Serializable {
+public class Users implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,14 +27,13 @@ public class User implements Serializable {
     private String name;
 
     @NotEmpty(message = "{mandatory.login.field}")
-    private String login;
+    private String username;
 
     @Email
     @NotEmpty(message = "{mandatory.email.field}")
     private String email;
 
-    @ElementCollection
-    private List<BigDecimal> income;
+    private Double income;
 
     @NotEmpty(message = "{mandatory.password.field}")
     private String password;
@@ -47,22 +43,22 @@ public class User implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
-    private Set<WaterBill> listWaterBill;
+    private List<WaterBill> listWaterBill = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
-    private Set<EnergyBill> listEnergyBill;
+    private List<EnergyBill> listEnergyBill= new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
-    private Set<Internet> listInternet;
+    private List<Internet> listInternet= new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
-    private Set<CardBill> listCardBill;
+    private List<CardBill> listCardBill= new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
-    private Set<OtherExpenses> listOtherExpenses;
+    private List<OtherExpenses> listOtherExpenses= new ArrayList<>();
 
 }

@@ -36,5 +36,5 @@ public class OtherExpenses implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "cd_user")
-    private User users;
+    private Users users;
 }

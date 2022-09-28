@@ -7,18 +7,15 @@ import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class EnergyBill implements Serializable {
+public class EnergyFront {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private UUID id;
 
     @Value("Conta de luz")
@@ -31,9 +28,6 @@ public class EnergyBill implements Serializable {
 
     @Temporal(TemporalType.DATE)
     private Date dueDate;
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JoinColumn(name = "cd_user")
-    private Users users;
 
-
+    private UUID users;
 }

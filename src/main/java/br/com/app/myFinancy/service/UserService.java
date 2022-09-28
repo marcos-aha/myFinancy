@@ -2,48 +2,49 @@ package br.com.app.myFinancy.service;
 
 import br.com.app.myFinancy.dto.UserDTO;
 import br.com.app.myFinancy.model.UpdateUser;
-import br.com.app.myFinancy.model.User;
+import br.com.app.myFinancy.model.UserLogin;
+import br.com.app.myFinancy.model.Users;
 import br.com.app.myFinancy.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.UUID;
 
-import static java.util.stream.Collectors.toList;
 import static org.springframework.beans.BeanUtils.copyProperties;
 import static org.springframework.http.HttpStatus.*;
 
 @Service
-@AllArgsConstructor
-public class UserService {
 
-    private final UserRepository userRepository;
+public class UserService implements UserDetailsService {
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder encoder;
 
-    private UserDTO convertForDTO(User user) {
+    private UserDTO convertForDTO(Users user) {
         UserDTO dto = new UserDTO();
         copyProperties(user, dto);
-        dto.setIncomeTotal(dto.getIncome().stream()
-                .reduce(BigDecimal.valueOf(0), (ac, income) -> income.add(ac)));
         return dto;
     }
-    public UserDTO save(User user) {
+    public UserDTO save(Users user) {
         user.setIsActive(true);
+        user.setPassword(encoder.encode(user.getPassword()));
         return convertForDTO(userRepository.save(user));
     }
 
     public void update(UUID id, UpdateUser user) {
         userRepository.findById(id).map(userExist -> {
-            user.setId(userExist.getId());
-            if (user.getNewPassword()!=null) {
-                if(user.getOldPassword().equals(userExist.getPassword())) {
-                    userExist.setPassword(user.getNewPassword());
-                } else {
-                    throw new ResponseStatusException(NOT_FOUND, "Senha incorreta.");
-                }
+            if (!encoder.matches(user.getPassword(), userExist.getPassword())) {
+                user.setPassword(encoder.encode(user.getPassword()));
             }
+            user.setId(userExist.getId());
             copyProperties(user, userExist);
             userRepository.save(userExist);
             return Void.TYPE;
@@ -51,22 +52,43 @@ public class UserService {
 
     }
 
-    public List<UserDTO> listAll() {
-        return userRepository.findAll().stream().filter(User::getIsActive).map(this::convertForDTO).collect(toList());
-    }
 
     public UserDTO findById(UUID id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Usuário não encontrado."));
+        Users user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Usuário não encontrado."));
         return convertForDTO(user);
     }
 
 
     public void deleteUser(UUID id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Usuário não encontrado."));
+        Users user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Usuário não encontrado."));
         if(!user.getIsActive()) {
             throw new ResponseStatusException(NOT_FOUND, "Conta já se encontra desativada.");
         }
         user.setIsActive(false);
         userRepository.save(user);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Users user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+        String[] roles = new String[] {"ADMIN", "USER"};
+        return org.springframework.security.core.userdetails.User.builder()
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .roles(roles)
+                .build();
+    }
+
+    public UserDetails authenticateUser(UserLogin users) {
+        UserDetails user = loadUserByUsername(users.getUsername());
+        Boolean validPassword = encoder.matches(users.getPassword(), user.getPassword());
+        if(validPassword) {
+            return user;
+        }
+        throw new NullPointerException();
+    }
+
+    public String findByIdLogin(String username) {
+        return userRepository.findByUsername(username).get().getId().toString();
     }
 }

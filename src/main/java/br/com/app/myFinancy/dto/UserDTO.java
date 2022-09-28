@@ -17,11 +17,9 @@ public class UserDTO {
 
     private String name;
 
-    private String login;
+    private String username;
 
     private String email;
 
-    private List<BigDecimal> income;
-
-    private BigDecimal incomeTotal;
+    private Double income;
 }

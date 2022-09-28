@@ -20,7 +20,7 @@ import java.util.UUID;
 public class CardBill implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Length(max = 20)
@@ -28,17 +28,15 @@ public class CardBill implements Serializable {
     private String description;
 
     @NotNull(message = "{mandatory.price.field}")
-    private BigDecimal price;
+    private Double price;
 
-    @NotEmpty(message = "{mandatory.date.field}")
     @Temporal(TemporalType.DATE)
     private Date dueDate;
 
-    @NotEmpty(message = "{mandatory.closingDate.field}")
     @Temporal(TemporalType.DATE)
     private Date closingDate;
 
     @ManyToOne
     @JoinColumn(name = "cd_user")
-    private User users;
+    private Users users;
 }

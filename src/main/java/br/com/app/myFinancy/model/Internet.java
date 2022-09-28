@@ -20,21 +20,20 @@ import java.util.UUID;
 public class Internet implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Value("Conta de internet")
     private String description;
 
     @NotNull(message = "{mandatory.price.field}")
-    private BigDecimal price;
+    private Double price;
 
-    @NotEmpty(message = "{mandatory.date.field}")
     @Temporal(TemporalType.DATE)
     private Date dueDate;
 
     @ManyToOne
     @JoinColumn(name = "cd_user")
-    private User users;
+    private Users users;
 
 }
