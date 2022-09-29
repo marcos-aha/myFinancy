@@ -3,42 +3,42 @@
         <form class="form">
             <mat-form-field class="fullWidth" appearance="outline">
                 <mat-label>nome</mat-label>
-                <input matInput placeholder="Ex.. Fulano de tal..." required [(ngModel)]="register.name" 
+                <input matInput placeholder="Ex.. Fulano de tal..." required [(ngModel)]="register.name" name="name"
                 [formControl]="name">
                 <mat-icon matSuffix>badge</mat-icon>
             </mat-form-field>
         
             <mat-form-field class="fullWidth" appearance="outline">
                 <mat-label>email</mat-label>
-                <input matInput placeholder="@email.com" required [(ngModel)]="register.email" 
+                <input matInput placeholder="@email.com" name="email" required [(ngModel)]="register.email" 
                 [formControl]="email">
                 <mat-icon matSuffix>email</mat-icon>
             </mat-form-field>
         
             <mat-form-field class="fullWidth" appearance="outline" floatLabel="always">
                 <mat-label>renda</mat-label>
-                <input matInput type="number" placeholder="renda" class="right-align" required [(ngModel)]="register.income" 
-                [formControl]="income">
+                <input matInput type="number" placeholder="renda" name="income" class="right-align" required [(ngModel)]="register.income">
                 <mat-icon matSuffix>paid</mat-icon>
             </mat-form-field>
 
             <mat-form-field class="fullWidth" appearance="outline">
                 <mat-label>username</mat-label>
-                <input matInput placeholder="Ex.. fulano" required [(ngModel)]="register.username" 
+                <input matInput placeholder="Ex.. fulano" required [(ngModel)]="register.username" name="username"
                 [formControl]="username">
                 <mat-icon matSuffix>account_circle</mat-icon>
             </mat-form-field>
         
             <mat-form-field class="fullWidth" appearance="outline">
                 <mat-label>senha</mat-label>
-                <input matInput placeholder="1234" [type]="hide ? 'password' : 'text'" required>
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" 
-                [attr.aria-pressed]="hide" [(ngModel)]="register.password" 
+                <input matInput placeholder="1234" [type]="hide ? 'password' : 'text'" required 
+                [(ngModel)]="register.password" name="password"
                 [formControl]="password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" >
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
             </mat-form-field>
-            <button mat-flat-button [disabled]="!validaCampos()"  class="register" color="primary">Entrar</button>
+            <button mat-flat-button [disabled]="!validaCampos()" (click)="create()"  class="register" color="primary">Cadastrar</button>
+            <button mat-stroked-button (click)="cancel()"  class="mat-elevation-z4 comeBack" color="primary">Voltar</button>
         </form>  
     </div>
 

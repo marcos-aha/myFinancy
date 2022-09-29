@@ -9,17 +9,9 @@
             </a>
             <a mat-list-item routerLink="tecnicos">
                 <i class="material-icons">account_circle</i>
-                Técnicos
+                Perfil
             </a>
-            <a mat-list-item routerLink="/">
-                <i class="material-icons">person</i>
-                Clientes
-            </a>
-            <a mat-list-item routerLink="/">
-                <i class="material-icons">code</i>
-                Github
-            </a>
-            <a mat-list-item>
+            <a mat-list-item (click)="logout()">
                 <i class="material-icons">logout</i>
                 Logout
             </a>
@@ -29,6 +21,6 @@
         <button class="menu mat-elevation-z8" (click)="drawer.toggle()" mat-icon-button>
             <mat-icon>menu</mat-icon>
         </button>
-        <app-home></app-home>
+        <router-outlet></router-outlet>
     </div>
 </mat-drawer-container>

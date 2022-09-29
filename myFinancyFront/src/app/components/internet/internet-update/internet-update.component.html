@@ -1,0 +1,24 @@
+<mat-card>
+    <mat-card-title>Alterar dados de uma conta</mat-card-title>
+</mat-card>
+<form class="from mat-elevation-z8">
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <input [(ngModel)]="internet.description" name="description" matInput placeholder="Conta de energia" required disabled >
+      <mat-icon matSuffix>electric_bolt</mat-icon>
+    </mat-form-field>
+ 
+    <mat-form-field appearance="fill">
+      <mat-label>Price</mat-label>
+      <input [(ngModel)]="internet.price" name="price" matInput placeholder="0,00" required>
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Vencimento</mat-label>
+        <input [(ngModel)]="internet.dueDate" type="date" name="dueDate" matInput>
+        <mat-icon matSuffix>calendar_month</mat-icon>
+    </mat-form-field>
+    <button mat-raised-button (click)="update()" color="primary">Alterar Dados</button>
+    <button mat-raised-button (click)="cancel()" color="warn">Cancelar</button>
+</form>

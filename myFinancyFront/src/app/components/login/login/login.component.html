@@ -3,20 +3,20 @@
     <form class="form">
         <img src="assets/img/MyFinancy1-removebg-preview.png" alt="logo">
         <mat-form-field appearance="fill" floatLabel="always" >
-            <input matInput type="text" [(ngModel)]="login.username" [formControl]="username"  placeholder="username" required>
+            <input matInput type="text" [(ngModel)]="login.username" name="username" [formControl]="username"  placeholder="username" required>
             <mat-icon matSuffix>badge</mat-icon>
         </mat-form-field>
         
         <mat-form-field appearance="fill">
             <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="login.password" 
-            [formControl]="password" placeholder="password" required>
+            [formControl]="password" placeholder="password" required name="password">
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
         </mat-form-field>
 
         <div class="buttons">
-            <button mat-flat-button [disabled]="!validaCampos()" class="login" color="primary">Entrar</button>
+            <button mat-flat-button [disabled]="!validaCampos()" class="login" (click)="validUser()" color="primary">Entrar</button>
             <p>ou</p>
             <a routerLink="/register" class="cadastro">cadastre-se</a>
         </div>

@@ -1,0 +1,41 @@
+.container{
+    width: 90%;
+    margin: auto;
+    background-color: aliceblue;
+}
+
+.table {
+    width: 70%;
+    margin: 2rem auto auto auto;
+}
+
+table{
+    
+    width: 100%;
+}
+
+
+mat-form-field{
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    font-weight: bold;
+}
+
+button {
+    margin-top: 3rem;
+}
+
+.edit{
+    margin-right: .3rem;
+}
+
+.edit > i {
+    color: #d9cd26;
+}
+
+.delete> i {
+    color: #cf0317;
+}

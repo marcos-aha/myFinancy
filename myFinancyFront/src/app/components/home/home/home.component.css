@@ -4,14 +4,14 @@
     width: 100%;
     justify-content: center;
     flex-direction: column;
-    background-color: white;
+    background-color: aliceblue;
 }
 .input {
     display: flex;
     align-items: center;
     width: 100%;
     justify-content: space-around;
-    background-color: white;
+    background-color: aliceblue;
     padding: 3rem;
 
 }
@@ -46,9 +46,11 @@ mat-icon.card {
 }
 
 .energy{
-    color: yellow;
     font-size: 1.1rem;
     font-weight: 300;
+}
+.energy mat-icon {
+    color: yellow;
 }
 .water{
     font-size: 1.1rem;

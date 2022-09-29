@@ -1,0 +1,31 @@
+<mat-card>
+    <mat-card-title>Remover uma conta de energia</mat-card-title>
+</mat-card>
+<form class="from mat-elevation-z8">
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <input [ngModel]="energy.description" name="description" disabled matInput required >
+      <mat-icon matSuffix>electric_bolt</mat-icon>
+    </mat-form-field>
+ 
+    <mat-form-field appearance="fill">
+      <mat-label>Price</mat-label>
+      <input [ngModel]="energy.price" name="price" disabled matInput required>
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Expenditure</mat-label>
+      <input [ngModel]="energy.expenditure" name="expenditure" disabled matInput required>
+      <mat-icon matSuffix>settings_input_component</mat-icon>
+
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Vencimento</mat-label>
+        <input [(ngModel)]="energy.dueDate" disabled name="dueDate" matInput>
+        <mat-icon matSuffix>calendar_month</mat-icon>
+    </mat-form-field>
+    <button mat-raised-button (click)="delete()" color="warn">Excluir</button>
+    <button mat-raised-button (click)="cancel()" color="primary">Cancelar</button>
+</form>
+

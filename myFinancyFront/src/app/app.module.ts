@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +27,25 @@ import { MatCardModule } from '@angular/material/card';
 import { HomeComponent } from './components/home/home/home.component';
 import { NavComponent } from './components/nav/nav/nav.component';
 import { HeaderComponent } from './components/header/header/header.component';
+import { EnergyComponent } from './components/energy/energy/energy.component';
+import { WaterComponent } from './components/water/water/water.component';
+import { HttpClientModule } from '@angular/common/http';
+import { EnergyCreateComponent } from './components/energy/energy-create/energy-create.component';
+import { EnergyUpdateComponent } from './components/energy/energy-update/energy-update.component';
+import { EnergyDeleteComponent } from './components/energy/energy-delete/energy-delete.component';
+import { AuthInterceptorProvider } from './interceptors/auth.intercep';
+import { WaterCreateComponent } from './components/water/water-create/water-create.component';
+import { WaterUpdateComponent } from './components/water/water-update/water-update.component';
+import { WaterDeleteComponent } from './components/water/water-delete/water-delete.component';
+import { InternetComponent } from './components/internet/internet/internet.component';
+import { InternetCreateComponent } from './components/internet/internet-create/internet-create.component';
+import { InternetUpdateComponent } from './components/internet/internet-update/internet-update.component';
+import { InternetDeleteComponent } from './components/internet/internet-delete/internet-delete.component';
+import { CardComponent } from './components/card/card/card.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { CommonModule} from '@angular/common';
+
+
 
 @NgModule({
   declarations: [
@@ -34,7 +54,20 @@ import { HeaderComponent } from './components/header/header/header.component';
     RegisterComponent,
     HomeComponent,
     NavComponent,
-    HeaderComponent
+    HeaderComponent,
+    EnergyComponent,
+    WaterComponent,
+    EnergyCreateComponent,
+    EnergyUpdateComponent,
+    EnergyDeleteComponent,
+    WaterCreateComponent,
+    WaterUpdateComponent,
+    WaterDeleteComponent,
+    InternetComponent,
+    InternetCreateComponent,
+    InternetUpdateComponent,
+    InternetDeleteComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
@@ -55,9 +88,12 @@ import { HeaderComponent } from './components/header/header/header.component';
     MatTableModule,
     MatRadioModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    HttpClientModule,
+    MatProgressSpinnerModule,
+    CommonModule
   ],
-  providers: [],
+  providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
