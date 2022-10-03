@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { User } from 'src/app/components/models/register';
+import { Perfil } from 'src/app/components/models/perfil';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,17 @@ export class LoginService {
       return this.ids;
     })
     return this.ids;
+  }
+
+  findByUser(): Observable<Perfil>{
+    return this.http.get<Perfil>(`${this.baseUrl}/${this.ids}`)
+  }
+
+  update(perfil: Perfil) : Observable<Perfil> {
+    return this.http.put<Perfil>(`${this.baseUrl}/${perfil.id}`, perfil);
+  }
+
+  findListAll() : Observable<Object[]> {
+    return this.http.get<Object[]>(`${this.baseUrl}/bills/${this.ids}`)
   }
 }

@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       this.auth.successfulLogin(token.substring(7));
       this.router.navigate(['home'])
     }), ()=> {
-      console.log('nao deu certo')
+      
     }
   }
 

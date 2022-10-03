@@ -1,8 +1,7 @@
-export interface Card {
+export interface Expenses {
     id?: string,
     description: string,
     price: number,
-    closingDate: string,
-    dueDate: string,
+    buyDate: string,
     users?: string
 }

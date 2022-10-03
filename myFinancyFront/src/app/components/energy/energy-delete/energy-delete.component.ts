@@ -20,7 +20,6 @@ export class EnergyDeleteComponent implements OnInit {
 
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('id') as any;
-    console.log(id)
     this.service.findById(id).subscribe(energy =>{
       this.energy = energy
     })

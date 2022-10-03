@@ -1,0 +1,31 @@
+<mat-card>
+    <mat-card-title>Remover uma conta de cartão</mat-card-title>
+</mat-card>
+<form class="from mat-elevation-z8">
+    <mat-form-field appearance="fill">
+      <mat-label>Descrição</mat-label>
+      <input [ngModel]="card.description" name="description" disabled matInput required >
+      <mat-icon matSuffix>credit_card</mat-icon>
+    </mat-form-field>
+ 
+    <mat-form-field appearance="fill">
+      <mat-label>Preço</mat-label>
+      <input [ngModel]="card.price | currency: 'BRL'" name="price" disabled matInput required>
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Vencimento</mat-label>
+        <input [(ngModel)]="card.dueDate" disabled name="dueDate" matInput>
+        <mat-icon matSuffix>calendar_month</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Fechamento da fatura</mat-label>
+        <input [ngModel]="card.closingDate" name="closingDate" disabled matInput required>
+        <mat-icon matSuffix>calendar_montht</mat-icon>
+      </mat-form-field>
+
+    <button mat-raised-button (click)="delete()" color="warn">Excluir</button>
+    <button mat-raised-button (click)="cancel()" color="primary">Cancelar</button>
+</form>

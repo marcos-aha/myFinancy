@@ -1,0 +1,31 @@
+<mat-card>
+    <mat-card-title>Perfil</mat-card-title>
+</mat-card>
+<form class="from mat-elevation-z8">
+    <mat-form-field appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input [ngModel]="perfil.name" name="name" matInput required >
+      <mat-icon matSuffix>badge</mat-icon>
+    </mat-form-field>
+ 
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input [(ngModel)]="perfil.email" type="text" name="email" matInput placeholder="0" required>
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Renda</mat-label>
+      <input [(ngModel)]="perfil.income" name="income" matInput>
+      <mat-icon matSuffix>paid</mat-icon>
+    </mat-form-field>
+    <mat-form-field class="fullWidth" appearance="outline" >
+    <mat-label>senha</mat-label>
+        <input matInput placeholder="1234" [type]="hide ? 'password' : 'text'"  id="password" name="password" [(ngModel)]="newPassword">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" >
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    </mat-form-field>
+    <button mat-raised-button (click)="update()" color="primary">Salvar</button>
+    <button mat-raised-button (click)="cancel()" color="warn">Cancelar</button>
+</form>

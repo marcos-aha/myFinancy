@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EnergyService {
-  reload=true;
   baseUrl = 'http://localhost:8080/energy'
   constructor(private http: HttpClient, private userService: LoginService) { }
 

@@ -1,3 +1,11 @@
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { OtherExpensesUpdateComponent } from './components/other-Expenses/other-expenses-update/other-expenses-update.component';
+import { OtherExpensesDeleteComponent } from './components/other-Expenses/other-expenses-delete/other-expenses-delete.component';
+import { OtherExpensesCreateComponent } from './components/other-Expenses/other-expenses-create/other-expenses-create.component';
+import { OtherExpensesComponent } from './components/other-Expenses/other-expenses/other-expenses.component';
+import { CardUpdateComponent } from './components/card/card-update/card-update.component';
+import { CardDeleteComponent } from './components/card/card-delete/card-delete.component';
+import { CardCreateComponent } from './components/card/card-create/card-create.component';
 import { CardComponent } from './components/card/card/card.component';
 import { InternetUpdateComponent } from './components/internet/internet-update/internet-update.component';
 import { InternetCreateComponent } from './components/internet/internet-create/internet-create.component';
@@ -81,6 +89,38 @@ const routes: Routes = [
       {
         path: 'card',
         component: CardComponent
+      },
+      {
+        path: 'card/create',
+        component: CardCreateComponent
+      },
+      {
+        path: 'card/delete/:id',
+        component: CardDeleteComponent
+      },
+      {
+        path: 'card/update/:id',
+        component: CardUpdateComponent
+      },
+      {
+        path:'otherExpenses',
+        component: OtherExpensesComponent
+      },
+      {
+        path: 'otherExpenses/create',
+        component: OtherExpensesCreateComponent
+      },
+      {
+        path: 'otherExpenses/delete/:id',
+        component: OtherExpensesDeleteComponent
+      },
+      {
+        path: 'otherExpenses/update/:id',
+        component: OtherExpensesUpdateComponent
+      },
+      {
+        path: 'perfil',
+        component: PerfilComponent
       }
     ], canActivate: [AuthGuard]
   },

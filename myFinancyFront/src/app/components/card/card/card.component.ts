@@ -30,7 +30,8 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.findAll().subscribe(card =>{
+    let token = localStorage.getItem('token') as any;
+    this.service.findAll(token).subscribe(card =>{
       this.card = card
       this.dataSource = new MatTableDataSource<Card>(card);
       this.dataSource.paginator = this.paginator;

@@ -10,6 +10,9 @@ import { HeaderService } from 'src/app/services/header/header.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  expenses: Number=0;
+  income: Number=0;
+  
 
   constructor(private router: Router, private userService: LoginService,private headerService: HeaderService ) { 
     headerService.headerData = {
@@ -22,6 +25,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     let token = localStorage.getItem('token') as any;
     this.userService.findByIdUser(token)
+    this.listExpenses()
+    this.findIncome()
   }
 
   energy(): void {
@@ -39,6 +44,22 @@ export class HomeComponent implements OnInit {
 
   card(): void {
     this.router.navigate(['card'])
+  }
+
+  other(): void {
+    this.router.navigate(['otherExpenses'])
+  }
+
+  listExpenses(){
+    this.userService.findListAll().subscribe(list =>{
+      this.expenses= list.reduce((acum, price) => Number(acum) + Number(price)) as any
+    })
+  }
+
+  findIncome(){
+    this.userService.findByUser().subscribe(user =>{
+      this.income=user.income
+    })
   }
 
   

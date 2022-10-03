@@ -1,0 +1,30 @@
+<mat-card>
+    <mat-card-title>Alterar dados de uma conta</mat-card-title>
+</mat-card>
+<form class="from mat-elevation-z8">
+    <mat-form-field appearance="fill">
+      <mat-label>Descrição</mat-label>
+      <input [(ngModel)]="card.description" name="description" matInput placeholder="Conta de energia" required>
+      <mat-icon matSuffix>credit_card</mat-icon>
+    </mat-form-field>
+ 
+    <mat-form-field appearance="fill">
+      <mat-label>Preço</mat-label>
+      <input [(ngModel)]="card.price" name="price" matInput placeholder="0,00" required>
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Vencimento</mat-label>
+        <input [(ngModel)]="card.dueDate" type="date" name="dueDate" matInput>
+        <mat-icon matSuffix>calendar_month</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Fechamento da fatura</mat-label>
+        <input [(ngModel)]="card.closingDate" type="date" name="closingDate" matInput>
+        <mat-icon matSuffix>calendar_month</mat-icon>
+    </mat-form-field>
+    <button mat-raised-button (click)="update()" color="primary">Alterar Dados</button>
+    <button mat-raised-button (click)="cancel()" color="warn">Cancelar</button>
+</form>

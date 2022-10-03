@@ -1,0 +1,25 @@
+<mat-card>
+    <mat-card-title>Nova conta de outras despesas</mat-card-title>
+</mat-card>
+<form class="from mat-elevation-z8">
+    <mat-form-field appearance="fill">
+      <mat-label>Descrição</mat-label>
+      <input [(ngModel)]="expenses.description" name="description" matInput required >
+      <mat-icon matSuffix>shopping_cart</mat-icon>
+    </mat-form-field>
+ 
+    <mat-form-field appearance="fill">
+      <mat-label>Preço</mat-label>
+      <input [(ngModel)]="expenses.price" type="number" name="price" matInput placeholder="0" required>
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="fill">
+        <mat-label>Data de compra</mat-label>
+        <input [(ngModel)]="expenses.buyDate" type="date"  name="buyDate" matInput>
+        <mat-icon matSuffix>calendar_month</mat-icon>
+    </mat-form-field>
+    <button mat-raised-button (click)="create()" color="primary">Salvar</button>
+    <button mat-raised-button (click)="cancel()" color="warn">Cancelar</button>
+</form>

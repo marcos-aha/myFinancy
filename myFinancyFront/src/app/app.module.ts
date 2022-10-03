@@ -44,6 +44,14 @@ import { InternetDeleteComponent } from './components/internet/internet-delete/i
 import { CardComponent } from './components/card/card/card.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { CommonModule} from '@angular/common';
+import { CardCreateComponent } from './components/card/card-create/card-create.component';
+import { CardUpdateComponent } from './components/card/card-update/card-update.component';
+import { CardDeleteComponent } from './components/card/card-delete/card-delete.component';
+import { OtherExpensesComponent } from './components/other-Expenses/other-expenses/other-expenses.component';
+import { OtherExpensesCreateComponent } from './components/other-Expenses/other-expenses-create/other-expenses-create.component';
+import { OtherExpensesUpdateComponent } from './components/other-Expenses/other-expenses-update/other-expenses-update.component';
+import { OtherExpensesDeleteComponent } from './components/other-Expenses/other-expenses-delete/other-expenses-delete.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 
 
@@ -67,7 +75,15 @@ import { CommonModule} from '@angular/common';
     InternetCreateComponent,
     InternetUpdateComponent,
     InternetDeleteComponent,
-    CardComponent
+    CardComponent,
+    CardCreateComponent,
+    CardUpdateComponent,
+    CardDeleteComponent,
+    OtherExpensesComponent,
+    OtherExpensesCreateComponent,
+    OtherExpensesUpdateComponent,
+    OtherExpensesDeleteComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

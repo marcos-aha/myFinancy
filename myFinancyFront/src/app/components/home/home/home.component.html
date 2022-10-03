@@ -2,12 +2,12 @@
     <div class="input">
         <mat-form-field class="a" appearance="fill">
             <mat-label>Income (disabled)</mat-label>
-            <input matInput disabled value="Income">
+            <input matInput disabled value="{{income}}">
             <mat-icon matSuffix class="iconGreen">arrow_upward</mat-icon>
         </mat-form-field>
         <mat-form-field class="b" appearance="fill">
             <mat-label>expenses (disabled)</mat-label>
-            <input matInput disabled value="Expenses">
+            <input matInput disabled [ngModel]="expenses">
             <mat-icon matSuffix color="warn">arrow_downward</mat-icon>
         </mat-form-field>
     </div>
@@ -24,7 +24,7 @@
         <button mat-flat-button color="primary" class="card" (click)="card()">Conta de cartão
             <mat-icon matSuffix class="card">credit_card</mat-icon>
         </button>
-        <button mat-flat-button color="primary" class="other">Outras despesas
+        <button mat-flat-button color="primary" class="other" (click)="other()">Outras despesas
             <mat-icon matSuffix class="card">shopping_cart</mat-icon>
         </button>
         

@@ -22,7 +22,7 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>Vencimento</mat-label>
-        <input [(ngModel)]="energy.dueDate" disabled name="dueDate" matInput>
+        <input [ngModel]="energy.dueDate" disabled name="dueDate" matInput>
         <mat-icon matSuffix>calendar_month</mat-icon>
     </mat-form-field>
     <button mat-raised-button (click)="delete()" color="warn">Excluir</button>

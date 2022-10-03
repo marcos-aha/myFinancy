@@ -1,3 +1,4 @@
+import { LoginService } from './../../../services/login/login.service';
 import { HeaderService } from './../../../services/header/header.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  name: String = ''
 
-  constructor(private service: HeaderService) { }
+  constructor(private service: HeaderService, private userService: LoginService) { }
 
   ngOnInit(): void {
+    let token = localStorage.getItem('token') as any;
+    this.userService.findByIdUser(token);
+    this.userService.findByUser().subscribe(user =>
+      this.name= user.name
+    )
+
   }
 
   get title() : string {

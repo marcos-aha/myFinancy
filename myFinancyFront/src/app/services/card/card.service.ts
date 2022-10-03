@@ -1,3 +1,4 @@
+import { LoginService } from 'src/app/services/login/login.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -8,10 +9,12 @@ import { Card } from 'src/app/components/models/card';
 })
 export class CardService {
   baseUrl = 'http://localhost:8080/card'
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private userService: LoginService) { }
 
-  findAll(): Observable<Card[]> {
-    return this.http.get<Card[]>(this.baseUrl);
+  findAll(token: string): Observable<Card[]> {
+    let ids= null;
+    ids =this.userService.findByIdUser(token)
+    return this.http.get<Card[]>(`${this.baseUrl}/total/${ids}`);
   }
 
   create(card: Card) : Observable<Card>{

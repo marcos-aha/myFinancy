@@ -1,27 +1,28 @@
 <mat-card>
-    <mat-card-title>Nova conta de água</mat-card-title>
+    <mat-card-title>Nova conta de cartão</mat-card-title>
 </mat-card>
 <form class="from mat-elevation-z8">
     <mat-form-field appearance="fill">
       <mat-label>Descrição</mat-label>
-      <input [ngModel]="water.description" name="description" matInput required disabled >
-      <mat-icon matSuffix>water_drop</mat-icon>
+      <input [(ngModel)]="card.description" name="description" matInput required placeholder="Ex. cartão fulano">
+      <mat-icon matSuffix>credit_card</mat-icon>
     </mat-form-field>
  
     <mat-form-field appearance="fill">
       <mat-label>Preço</mat-label>
-      <input [(ngModel)]="water.price" type="number" name="price" matInput placeholder="0" required>
+      <input [(ngModel)]="card.price" type="number" name="price" matInput placeholder="0" required>
       <mat-icon matSuffix>attach_money</mat-icon>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Consumo</mat-label>
-      <input [(ngModel)]="water.expenditure" name="expenditure" matInput>
-      <mat-icon matSuffix>settings_input_component</mat-icon>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
         <mat-label>Vencimento</mat-label>
-        <input [(ngModel)]="water.dueDate" type="date" name="dueDate" matInput>
+        <input [(ngModel)]="card.dueDate" type="date"  name="dueDate" matInput>
+        <mat-icon matSuffix>calendar_month</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Fechamento da fatura</mat-label>
+        <input [(ngModel)]="card.closingDate" type="date"  name="closingDate" matInput>
         <mat-icon matSuffix>calendar_month</mat-icon>
     </mat-form-field>
     <button mat-raised-button (click)="create()" color="primary">Salvar</button>

@@ -13,7 +13,7 @@
     justify-content: space-around;
     background-color: aliceblue;
     padding: 3rem;
-
+    flex-wrap: wrap;
 }
 
 .a{
@@ -31,10 +31,12 @@
 }
 
 .container-card {
-    margin-top: 1rem;
+    margin: 1rem;
     display: flex;
     width: 100%;
     justify-content: space-around;
+    flex-wrap: wrap;
+ 
 }
 
 button {
