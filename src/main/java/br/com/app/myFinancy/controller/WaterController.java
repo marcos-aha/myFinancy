@@ -23,12 +23,12 @@ public class WaterController {
     private final WaterService service;
 
     @PostMapping
-    public ResponseEntity<WaterBill> create(@RequestBody @Valid WaterBill water) {
+    public ResponseEntity<WaterBill> create(@RequestBody @Valid WaterFront water) {
         return ResponseEntity.status(HttpStatus.OK).body(service.create(water));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<WaterBill> update(@RequestBody @Valid WaterBill water, @PathVariable UUID id) {
+    public ResponseEntity<WaterBill> update(@RequestBody @Valid WaterFront water, @PathVariable UUID id) {
         return ResponseEntity.status(HttpStatus.OK).body(service.update(water,id));
     }
 
@@ -39,7 +39,7 @@ public class WaterController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<WaterBill> findById(@PathVariable UUID id) {
+    public ResponseEntity<WaterFront> findById(@PathVariable UUID id) {
         return ResponseEntity.ok().body(service.findById(id));
     }
 

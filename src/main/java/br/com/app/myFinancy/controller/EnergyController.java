@@ -28,7 +28,7 @@ public class EnergyController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EnergyBill> update(@RequestBody @Valid EnergyBill energy, @PathVariable UUID id) {
+    public ResponseEntity<EnergyBill> update(@RequestBody @Valid EnergyFront energy, @PathVariable UUID id) {
         return ResponseEntity.status(HttpStatus.OK).body(service.update(energy,id));
     }
 
@@ -39,7 +39,7 @@ public class EnergyController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EnergyBill> findById(@PathVariable UUID id) {
+    public ResponseEntity<EnergyFront> findById(@PathVariable UUID id) {
         return ResponseEntity.ok().body(service.findById(id));
     }
 

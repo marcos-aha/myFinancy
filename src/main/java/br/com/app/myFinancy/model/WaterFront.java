@@ -1,20 +1,20 @@
 package br.com.app.myFinancy.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class WaterFront {
+public class WaterFront implements Serializable {
 
     private UUID id;
 
@@ -26,8 +26,7 @@ public class WaterFront {
 
     private Double expenditure;
 
-    @Temporal(TemporalType.DATE)
-    private Date dueDate;
-
+    private LocalDate dueDate;
+    @NotNull
     private UUID users;
 }

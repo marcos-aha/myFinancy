@@ -1,19 +1,20 @@
 package br.com.app.myFinancy.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class EnergyFront {
+public class EnergyFront implements Serializable {
 
 
     private UUID id;
@@ -26,8 +27,7 @@ public class EnergyFront {
 
     private Double expenditure;
 
-    @Temporal(TemporalType.DATE)
-    private Date dueDate;
-
+    private LocalDate dueDate;
+    @NotNull
     private UUID users;
 }

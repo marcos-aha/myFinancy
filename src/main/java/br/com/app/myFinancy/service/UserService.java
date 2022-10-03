@@ -5,23 +5,28 @@ import br.com.app.myFinancy.model.UpdateUser;
 import br.com.app.myFinancy.model.UserLogin;
 import br.com.app.myFinancy.model.Users;
 import br.com.app.myFinancy.repository.UserRepository;
-import lombok.AllArgsConstructor;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
+
+import java.util.stream.Collectors;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
 import static org.springframework.http.HttpStatus.*;
 
 @Service
-
 public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
@@ -41,11 +46,15 @@ public class UserService implements UserDetailsService {
 
     public void update(UUID id, UpdateUser user) {
         userRepository.findById(id).map(userExist -> {
-            if (!encoder.matches(user.getPassword(), userExist.getPassword())) {
+            if (!user.getPassword().equals(userExist.getPassword())) {
                 user.setPassword(encoder.encode(user.getPassword()));
+            } else {
+                user.setPassword(userExist.getPassword());
             }
-            user.setId(userExist.getId());
-            copyProperties(user, userExist);
+            userExist.setName(user.getName());
+            userExist.setIncome(user.getIncome());
+            userExist.setPassword(user.getPassword());
+            userExist.setEmail(user.getEmail());
             userRepository.save(userExist);
             return Void.TYPE;
         }).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Usuário não encontrado."));
@@ -53,9 +62,12 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public UserDTO findById(UUID id) {
-        Users user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Usuário não encontrado."));
-        return convertForDTO(user);
+    public UpdateUser findById(UUID id) {
+        Users user = userRepository.findById(id).
+                orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Usuário não encontrado."));
+        UpdateUser dto = new UpdateUser();
+        BeanUtils.copyProperties(user, dto);
+        return dto;
     }
 
 
@@ -72,7 +84,7 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Users user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
         String[] roles = new String[] {"ADMIN", "USER"};
-        return org.springframework.security.core.userdetails.User.builder()
+        return User.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())
                 .roles(roles)
@@ -90,5 +102,21 @@ public class UserService implements UserDetailsService {
 
     public String findByIdLogin(String username) {
         return userRepository.findByUsername(username).get().getId().toString();
+    }
+
+    public List<Double> findAll(UUID id) {
+        Users user = userRepository.findById(id).get();
+        List<Double> list = user.getListEnergyBill().stream().filter(energyBill -> energyBill.getDueDate().getMonth()
+                .equals(LocalDate.now().getMonth())).map(energy -> energy.getPrice()).collect(Collectors.toList());
+        user.getListWaterBill().stream().filter(water -> water.getDueDate().getMonth()
+                .equals(LocalDate.now().getMonth())).map(energy -> energy.getPrice()).forEach(water -> list.add(water));
+        user.getListOtherExpenses().stream().filter(other -> other.getBuyDate().getMonth()
+                .equals(LocalDate.now().getMonth())).map(energy -> energy.getPrice()).forEach(other -> list.add(other));
+        user.getListCardBill().stream().filter(card -> card.getDueDate().getMonth()
+                .equals(LocalDate.now().getMonth())).map(energy -> energy.getPrice()).forEach(card -> list.add(card));
+        user.getListInternet().stream().filter(internet -> internet.getDueDate().getMonth()
+                .equals(LocalDate.now().getMonth())).map(energy -> energy.getPrice()).forEach(internet -> list.add(internet));
+        return list;
+
     }
 }

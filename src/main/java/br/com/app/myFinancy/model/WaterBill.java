@@ -1,5 +1,6 @@
 package br.com.app.myFinancy.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
@@ -31,8 +33,7 @@ public class WaterBill implements Serializable {
 
     private Double expenditure;
 
-    @Temporal(TemporalType.DATE)
-    private Date dueDate;
+    private LocalDate dueDate;
     @ManyToOne
     @JoinColumn(name = "cd_user")
     private Users users;

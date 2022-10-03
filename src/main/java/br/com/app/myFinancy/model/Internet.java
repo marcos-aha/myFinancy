@@ -1,16 +1,18 @@
 package br.com.app.myFinancy.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
+
+import java.time.LocalDate;
+
 import java.util.UUID;
 
 @Data
@@ -29,11 +31,11 @@ public class Internet implements Serializable {
     @NotNull(message = "{mandatory.price.field}")
     private Double price;
 
-    @Temporal(TemporalType.DATE)
-    private Date dueDate;
+    private LocalDate dueDate;
 
     @ManyToOne
     @JoinColumn(name = "cd_user")
+    @NotNull
     private Users users;
 
 }

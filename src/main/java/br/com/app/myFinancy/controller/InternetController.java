@@ -23,12 +23,12 @@ public class InternetController {
     private final InternetService service;
 
     @PostMapping
-    public ResponseEntity<Internet> create(@RequestBody @Valid Internet internet) {
+    public ResponseEntity<Internet> create(@RequestBody @Valid InternetFront internet) {
         return ResponseEntity.status(HttpStatus.OK).body(service.create(internet));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Internet> update(@RequestBody @Valid Internet internet, @PathVariable UUID id) {
+    public ResponseEntity<Internet> update(@RequestBody @Valid InternetFront internet, @PathVariable UUID id) {
         return ResponseEntity.status(HttpStatus.OK).body(service.update(internet,id));
     }
 
@@ -39,7 +39,7 @@ public class InternetController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Internet> findById(@PathVariable UUID id) {
+    public ResponseEntity<InternetFront> findById(@PathVariable UUID id) {
         return ResponseEntity.ok().body(service.findById(id));
     }
 

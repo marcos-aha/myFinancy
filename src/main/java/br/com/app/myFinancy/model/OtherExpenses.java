@@ -1,5 +1,6 @@
 package br.com.app.myFinancy.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,8 +10,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
+
 import java.util.UUID;
 
 @Data
@@ -20,7 +21,7 @@ import java.util.UUID;
 public class OtherExpenses implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Length(max = 20)
@@ -28,12 +29,9 @@ public class OtherExpenses implements Serializable {
     private String description;
 
     @NotNull(message = "{mandatory.price.field}")
-    private BigDecimal price;
+    private Double price;
 
-    @NotEmpty(message = "{mandatory.date.field}")
-    @Temporal(TemporalType.DATE)
-    private Date dueDate;
-
+    private LocalDate buyDate;
     @ManyToOne
     @JoinColumn(name = "cd_user")
     private Users users;

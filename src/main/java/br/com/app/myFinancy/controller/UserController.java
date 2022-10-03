@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> findByID(@PathVariable UUID id) {
+    public ResponseEntity<UpdateUser> findByID(@PathVariable UUID id) {
         return ResponseEntity.status(OK).body(userService.findById(id));
     }
 
@@ -62,5 +62,10 @@ public class UserController {
     public ResponseEntity<String> idUser(@PathVariable String token) {
         String username = tokenService.findLoginUser(token);
         return ResponseEntity.ok().body(userService.findByIdLogin(username));
+    }
+
+    @GetMapping("/bills/{id}")
+    public ResponseEntity<List<Double>> listAll (@PathVariable UUID id) {
+        return ResponseEntity.ok().body(userService.findAll(id));
     }
 }

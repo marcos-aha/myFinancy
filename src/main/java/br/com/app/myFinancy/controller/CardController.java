@@ -22,12 +22,12 @@ public class CardController {
     private final CardService service;
 
     @PostMapping
-    public ResponseEntity<CardBill> create(@RequestBody @Valid CardBill card) {
+    public ResponseEntity<CardBill> create(@RequestBody @Valid CardFront card) {
         return ResponseEntity.status(HttpStatus.OK).body(service.create(card));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CardBill> update(@RequestBody @Valid CardBill card, @PathVariable UUID id) {
+    public ResponseEntity<CardBill> update(@RequestBody @Valid CardFront card, @PathVariable UUID id) {
         return ResponseEntity.status(HttpStatus.OK).body(service.update(card,id));
     }
 
@@ -38,7 +38,7 @@ public class CardController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CardBill> findById(@PathVariable UUID id) {
+    public ResponseEntity<CardFront> findById(@PathVariable UUID id) {
         return ResponseEntity.ok().body(service.findById(id));
     }
 

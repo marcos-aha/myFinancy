@@ -1,7 +1,6 @@
 package br.com.app.myFinancy.service;
 
-import br.com.app.myFinancy.model.CardBill;
-import br.com.app.myFinancy.model.Users;
+import br.com.app.myFinancy.model.*;
 import br.com.app.myFinancy.repository.CardRepository;
 import br.com.app.myFinancy.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -21,16 +20,25 @@ public class CardService {
 
     private final UserRepository userRepository;
 
-    public CardBill create(CardBill card) {
-        return repository.save(card);
+    public CardBill create(CardFront cardFront) {
+        System.out.println(cardFront);
+        return userRepository.findById(cardFront.getUsers()).map(useExist ->{
+            CardBill cardBill = new CardBill();
+            BeanUtils.copyProperties(cardFront,cardBill);
+            cardBill.setUsers(useExist);
+            repository.save(cardBill);
+            return cardBill;
+        }).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado."));
     }
 
-    public CardBill update(CardBill card, UUID id) {
-        repository.findById(id).map(cardExist -> {
-            BeanUtils.copyProperties(card, cardExist);
+    public CardBill update(CardFront card, UUID id) {
+        return repository.findById(id).map(cardExist -> {
+            cardExist.setDescription(card.getDescription());
+            cardExist.setPrice(card.getPrice());
+            cardExist.setDueDate(card.getDueDate());
+            cardExist.setClosingDate(card.getClosingDate());
             return repository.save(cardExist);
-        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta de cartão não encontrada"));
-        return null;
+        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta de energia não encontrada"));
     }
 
     public void delete(UUID id) {
@@ -40,9 +48,12 @@ public class CardService {
         }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta de cartão não encontrada"));
     }
 
-    public CardBill findById(UUID id) {
-        return repository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta de cartão não encontrada"));
+    public CardFront findById(UUID id) {
+        CardBill card = repository.findById(id).get();
+        CardFront cardFront = new CardFront();
+        BeanUtils.copyProperties(card, cardFront);
+        cardFront.setUsers(card.getUsers().getId());
+        return cardFront;
 
     }
 
